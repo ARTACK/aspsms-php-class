@@ -8,7 +8,7 @@
  */
 
 // include library
-include "../lib/aspsms.class.php";
+include "../lib/Aspsms.php";
 
 // init aspsms class with originator option
 $aspsms = new Aspsms('<YOUR_KEY>', '<YOUR_PASSWORD>', array(
