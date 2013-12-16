@@ -2,6 +2,9 @@
 /**
  * @author nadar <basil.suter@indielab.ch>
  * @see https://github.com/nadar/aspsms-php-class
+ *
+ * Changes to use with composer.
+ * @author Patrick Landolt <patrick.landolt@artack.ch>
  * 
  * $id$
  * 
@@ -17,6 +20,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+namespace Artack\ASPSMS;
 
 // see if the curl extension is loaded
 if (!function_exists('curl_init')) {
