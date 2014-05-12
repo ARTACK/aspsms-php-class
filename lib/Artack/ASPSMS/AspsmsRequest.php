@@ -113,7 +113,7 @@ curl_close($curl);
 // see if response is xml valid (else we have a basic api error)
 if (preg_match('/\<\?xml(.*)\?\>/', $response)) {
 // get node content
-$doc = new DOMDocument();
+$doc = new \DOMDocument();
 // load the xml reponse (which is xml)
 $doc->loadXML($response);
 // get content from the firstChild (there is no good documentation about aspsms response bodys)
