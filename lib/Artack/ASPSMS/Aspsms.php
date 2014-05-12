@@ -95,6 +95,19 @@ class Aspsms
     private $password = null;
     
     /**
+     * Originator to display
+     * @var string
+     */
+    private $originator = null;
+    
+    /**
+     * AffiliateId of use
+     * @var string
+     * @link http://aspsms.com/affiliates/howitworks.asp
+     */
+    private $affiliateId = null;
+    
+    /**
      * All sms status service reason codes which appears to be used when u have a not usual 
      * deliver status. There is an optional newsletter from 2009 with some more informations [see]
      * 
@@ -268,9 +281,7 @@ class Aspsms
         // start request width defined options for this action
         $response = $this->request("SendTextSMS", $this->getOptions(array(
             "Recipients",
-            "AffiliateId",
             "MessageText",
-            "Originator",
             "DeferredDeliveryTime",
             "FlashingSMS",
             "TimeZone",
@@ -439,7 +450,9 @@ class Aspsms
         // set default transfer values
         $transferValues = array(
             'UserKey' => $this->userkey,
-            'Password' => $this->password
+            'Password' => $this->password,
+            'Originator' => (string)$this->originator,
+            'AffiliateId' => (string)$this->affiliateId
         );
         /// get the request values urlencode und utf8encode first.
         foreach ($values as $key => $value) {
@@ -497,8 +510,17 @@ class Aspsms
             if (!in_array($key, $this->validOptions)) {
                 throw new AspsmsException("setOptions: Could not find the option \"$key\" in the validOptions list!");
             }
+            switch(strtolower($key)){
+                case 'originator':
+                    $this->originator = $value;
+                    break;
+                case 'affiliateid':
+                    $this->affiliateId = $value;
+                    break;
+                default:
+                    $this->currentOptions[$key] = $value;
+            }
             // set the options into the currentOptions list
-            $this->currentOptions[$key] = $value;
         }
         // default return
         return true;
